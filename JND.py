@@ -1,9 +1,10 @@
 #!/usr/bin/python
-class JNDLable:
+class JNDLevel:
 
-    def __init__(self,fileName='../SQF_data/Image_%d_l_h.txt',fileNums=50):
+    def __init__(self,fileName='../SQF_data/Image_%d_l_h.txt',fileNums=50,jpegFactor=100):
         self.fileName = fileName
         self.fileNums = fileNums
+        self.jpegFactor = jpegFactor
         self.generate()
 
     def readFile(self,fileName):
@@ -22,7 +23,7 @@ class JNDLable:
 
 
 if __name__ == '__main__':
-    jnd = JNDLable()
+    jnd = JNDLevel()
     print jnd.maxJND_level
 
 
