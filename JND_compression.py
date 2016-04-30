@@ -38,6 +38,6 @@ class  JNDJpegCompression:
             fp.close()
 
 if __name__ == '__main__':
-
-    jndc = JNDJpegCompression('../source_images/[BMP]/ImageJND_SRC02.bmp')
+    srcImg = sys.argv[1]
+    jndc = JNDJpegCompression(srcImg=srcImg)
     jndc.batchCompressImage()
