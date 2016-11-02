@@ -12,6 +12,10 @@ if [ ! -f $originImage  ]; then
 fi
 
 python JND_compression.py $originImage
-sed 's/INPUTIAMGE/compressionDir\/lable.txt/g' ./test.prototxt.template test.prototxt
-sh test_quick.sh
-python JND_judger.py
+baseOriginImage=`basename ${originImage}`
+python JND_slice.py compressionDir compressionDir_crop  label.txt
+#sed 's/INPUTIAMGE/compressionDir_crop\/label.txt/g' ./test.prototxt.template  test.prototxt
+num=`wc -l compressionDir_crop/label.txt|awk '{print $1}'`
+sh test_quick.sh $num result_dir/${baseOriginImage}.txt
+cp compressionDir_crop/label.txt result_dir/${baseOriginImage}.label
+#python JND_judger.py >> JND_juder.log

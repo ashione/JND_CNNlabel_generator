@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import os,sys
 class JNDLevel:
 
     def __init__(self,fileName='../SQF_data/Image_%d_l_h.txt',fileNums=50,jpegFactor=100):
@@ -21,9 +22,24 @@ class JNDLevel:
             self.maxJND_level = max(self.maxJND_level,len(self.jnd[len(self.jnd)-1]))
 
 
+# added at 2016-11-02 for libsvm training number of JND
+# there are ordered by number from 1 to 50 in MCL database
+def generateJNDNumberTrainingLabel(jnd,filename='./JND_label_number.txt'):
+    
+    fp = open(filename,'w+')
+    for i,item in enumerate(jnd):
+        fp.write('{no} {levels}'.format(no=i+1,levels=len(item)))
+        for order in item :
+            fp.write(' {0}'.format(order[0]))
+        fp.write('\n')
+    fp.close()
+    print 'jnd label number file written done'
+
 
 if __name__ == '__main__':
     jnd = JNDLevel()
-    print jnd.maxJND_level
+    print jnd.jnd
+    generateJNDNumberTrainingLabel(jnd.jnd)
+    #print jnd.maxJND_level
 
 
